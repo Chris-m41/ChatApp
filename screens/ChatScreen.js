@@ -18,17 +18,17 @@ export default class ChatScreen extends React.Component {
     componentDidMount() {
         Fire.get(message =>
             this.setState(previous => ({
-                messages: GiftedChat.append(previous.messages, message)
+                messages: GiftedChat.append(previous.message, message)
             }))
         );
     }
 
-    componentWillMount() {
+    UNSAFE_componentWillMount() {
         Fire.off()
     }
 
     render() {
-        const chat = <GiftedChat messages={this.state.message} onSend={Fire.send} user={this.user} />;
+        const chat = <GiftedChat messages={this.state.messages} onSend={Fire.send} user={this.user} />;
 
         if(Platform.OS === 'android') {
             return (
